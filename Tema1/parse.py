@@ -5,7 +5,9 @@ def parse_input(input_lines):
     coefficients = []
     constants = []
     for line in input_lines:
+        # split line read from file into words sep by " "
         split_line = line.split()
+        # dict to map variables to their coef
         var_map = {}
         for index in range(0, len(split_line)):
             is_negative = False
@@ -22,6 +24,8 @@ def parse_input(input_lines):
                     var_map[find_var.group()] = -var_map.get(find_var.group())
 
         coefficients_line = []
+
+        # for each expected variable
         for variable in ['x', 'y', 'z']:
             if variable in var_map:
                 v = var_map.get(variable)
@@ -29,6 +33,8 @@ def parse_input(input_lines):
             else:
                 coefficients_line.append(0)
         coefficients.append(coefficients_line)
+
+        # constants are always at the end of the line
         constants.append(int(split_line[-1]))
     return coefficients, constants
 
